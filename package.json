@@ -23,7 +23,6 @@
     "axios": "^1.13.2"
   },
   "files": [
-    "dist",
     "index.js"
   ]
 }
