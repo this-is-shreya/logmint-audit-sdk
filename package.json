@@ -1,0 +1,29 @@
+{
+  "name": "@logmint/audit",
+  "version": "1.0.0",
+  "description": "LogMint SDK for sending audit logs",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "logmint",
+    "audit",
+    "logs",
+    "sdk"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/this-is-shreya/logmint-audit-sdk.git"
+  },
+  "author": "Shreya Srivastava",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "files": [
+    "dist",
+    "index.js"
+  ]
+}
