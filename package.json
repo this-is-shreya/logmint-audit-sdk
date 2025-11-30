@@ -1,6 +1,6 @@
 {
   "name": "@logmint/audit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LogMint SDK for sending audit logs",
   "main": "index.js",
   "type": "commonjs",
@@ -23,7 +23,10 @@
     "axios": "^1.13.2"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "core",
+    "cloud",
+    "local"
   ],
   "publishConfig": {
     "access": "public"
