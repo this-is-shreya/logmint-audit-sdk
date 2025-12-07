@@ -3,6 +3,7 @@
 Watch full demo <a href="https://www.youtube.com/watch?v=FHgbC97xbY0">here</a>
 
 This SDK will help you log events directly on our cloud or in your local database just with the help of a few lines of code.
+<br/>
   <img width="600" height="440" alt="674_1x_shots_so" src="https://github.com/user-attachments/assets/8bebac43-4438-4937-84fe-f1b107857a50" />
 
 ### Local Setup
