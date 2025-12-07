@@ -6,6 +6,8 @@ const { writeLocal } = require("./local/writeLocal");
 
 const { sendToCloud } = require("./cloud/sendToCloud");
 const retryQueue = require("./cloud/retryQueue");
+const { addMetrics } = require("./cloud/addMetrics");
+const { overrideConsoleMethods } = require("./cloud/addLogs");
 
 let pool = null;
 /**
@@ -17,6 +19,7 @@ let pool = null;
  * @property {Object} db.client - A database client/pool instance (e.g., new Pool()).
  * @property {string} [apiKey] - API key for cloud mode.
  * @property {string} [secretKey] - Secret key for cloud mode.
+ * @property {string} [url] - URL for cloud mode
  *
  */
 
@@ -47,15 +50,19 @@ module.exports.init = async (options) => {
     if (config.mode === "local") {
       pool = await initLocal(config);
     }
+    else{
+      overrideConsoleMethods();
+    }
 
     console.log(`Audit log SDK initialized in ${config.mode} mode`);
   } catch (error) {
     throw new Error(error);
   }
 };
+
 /**
  * @typedef {Object} AuditLog
- * @property {string} project_id - Project ID.
+ * @property {string} project_id - Project ID (needed if config.mode is 'local')
  * @property {string} event_type - Event type.
  * @property {string} actor_id - Actor ID.
  * @property {string} actor_name - Actor name.
@@ -67,9 +74,8 @@ module.exports.init = async (options) => {
  */
 /**
  * @param {AuditLog} log
- * @param {string} baseUrl
  */
-module.exports.log = async (log, baseUrl) => {
+module.exports.log = async (log) => {
   try {
     validateLog(log);
 
@@ -80,7 +86,7 @@ module.exports.log = async (log, baseUrl) => {
     }
 
     if (config.mode === "cloud") {
-      await sendToCloud(log, false, baseUrl);
+      await sendToCloud(log, false);
     }
   } catch (error) {
     throw new Error(error);
@@ -89,21 +95,42 @@ module.exports.log = async (log, baseUrl) => {
 
 /**
  * Flushes pending logs.
- * @param {string} baseUrl
  * Processes any logs stored in the retry queue and attempts
  * to send them again (only in cloud mode).
  * @returns {Object} summary - If mode is "cloud", it returns a summary of
  * logs sent, requeued and dead
  */
-module.exports.flush = async (baseUrl) => {
+module.exports.flush = async () => {
   try {
     const config = getConfig();
 
     if (config.mode === "cloud") {
-      const summary = await retryQueue.flush(config, baseUrl);
+      const summary = await retryQueue.flush(config);
       return summary;
     }
   } catch (error) {
     throw new Error("Could not execute flush");
+  }
+};
+
+/**
+ * @typedef {Object} Metric
+ * @property {string} name - metric name.
+ * @property {string} value - value.
+ * @property {string} type - ["gauge", "counter", "histogram"].
+ * @property {Object} tags - tags.
+ */
+/**
+ * @param {Metric} metric
+ */
+module.exports.addMetric = async (metric) => {
+  try {
+    const config = getConfig();
+
+    if (config.mode === "cloud") {
+      await addMetrics(metric);
+    }
+  } catch (error) {
+    throw new Error("Could not add metric");
   }
 };

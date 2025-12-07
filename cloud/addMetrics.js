@@ -1,8 +1,7 @@
 const axios = require("axios");
 const { getConfig } = require("../core/config");
-const queue = require("./retryQueue");
 
-module.exports.sendToCloud = async (log, isFlush) => {
+module.exports.addMetrics = async (metric) => {
   const config = getConfig();
   const url = config.url;
   try {
@@ -20,12 +19,12 @@ module.exports.sendToCloud = async (log, isFlush) => {
         validateStatus: () => true,
       }
     );
-    
-    if(result.status != 200) {
+
+    if (result.status != 200) {
       console.log("Could not add log: ", result.data.msg);
       return;
     }
-    await axios.post(`${url}/api/events`, log, {
+    await axios.post(`${url}/api/metrics`, metric, {
       headers: {
         "x-api-key": `${config.apiKey}`,
         authorization: `Bearer ${config.secretKey}`,
@@ -33,16 +32,8 @@ module.exports.sendToCloud = async (log, isFlush) => {
       },
       validateStatus: () => true,
     });
-    console.log("log added successfully! -", log);
-    
+    console.log("metric added successfully! -", metric);
   } catch (err) {
     console.log(err);
-    
-    if(!isFlush) {
-      queue.add(log, config, url); // fallback to retry queue
-      console.log("added to retry queue");
-      
-    }
-    return new Error("Cloud send failed → queued");
   }
 };

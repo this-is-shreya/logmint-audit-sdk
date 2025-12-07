@@ -3,6 +3,7 @@ let config = Object.freeze({
   apiKey: null,
   db: null,
   secretKey: null,
+  url: null
 });
 
 const VALID_MODES = ["local", "cloud"];
@@ -15,6 +16,7 @@ const VALID_MODES = ["local", "cloud"];
  * @param {string|Object} [opts.db]
  * @param {string} [opts.apiKey]
  * @param {string} [opts.secretKey]
+ * @param {string} [opts.url]
  */
 module.exports.setConfig = (opts) => {
   const newConfig = { ...config }; // start with existing config
@@ -42,6 +44,14 @@ module.exports.setConfig = (opts) => {
         throw new Error("Secret Key not provided for cloud mode");
       }
       newConfig.secretKey = opts.secretKey;
+      if (!opts.url) {
+        throw new Error("URL not provided");
+      }
+      // ensure it starts with http/https
+      if (!/^https?:\/\//i.test(opts.url) || typeof opts.url !== "string" || opts.url.trim().length === 0) {
+        throw new Error("Invalid URL");
+      }
+      newConfig.url = opts.url;
     }
   }
 

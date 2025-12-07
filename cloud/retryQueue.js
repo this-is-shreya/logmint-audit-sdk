@@ -1,8 +1,9 @@
 // retryQueue.js
 const axios = require("axios");
 
-async function add(log, config, url) {
+async function add(log, config) {
   try {
+    const url = config.url;
     await axios.post(
       `${url}/api/redis/queue`,
       { log, api_key: config.apiKey },
@@ -20,8 +21,9 @@ async function add(log, config, url) {
   }
 }
 
-async function flush(config, url) {
+async function flush(config) {
   try {
+    const url = config.url;
     const result = await axios.post(
       `${url}/api/redis/flush`,
       { api_key: config.apiKey, secret_key: config.secretKey },

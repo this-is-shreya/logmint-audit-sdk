@@ -1,7 +1,7 @@
 {
-  "name": "@logmint/audit",
+  "name": "@logmint/sdk",
   "version": "1.0.1",
-  "description": "LogMint SDK for sending audit logs",
+  "description": "LogMint SDK for sending audit logs, metrics, application logs",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
@@ -11,7 +11,9 @@
     "logmint",
     "audit",
     "logs",
-    "sdk"
+    "sdk", 
+    "monitor", 
+    "metrics"
   ],
   "repository": {
     "type": "git",
