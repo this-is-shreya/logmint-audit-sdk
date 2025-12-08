@@ -2,6 +2,8 @@
 ## Welcome to LogMint SDK
 Watch full demo <a href="https://www.youtube.com/watch?v=FHgbC97xbY0">here</a>
 
+<a href="https://getlogmint.com">Visit site</a>
+
 This SDK will help you log events directly on our cloud or in your local database just with the help of a few lines of code.
 <br/>
   <img width="600" height="440" alt="674_1x_shots_so" src="https://github.com/user-attachments/assets/8bebac43-4438-4937-84fe-f1b107857a50" />
@@ -55,7 +57,7 @@ await log({
   metadata: { old_column: "old", new_column: "new" },
 });
 ```
-You can visualize the audit logs:
+You can visualize the audit logs on the <a href="https://getlogmint.com">site</a>:
 
 <img width="660" height="440" alt="459_1x_shots_so" src="https://github.com/user-attachments/assets/eb00495d-17be-4466-a8dc-0a69372c4fa0" />
 
@@ -99,7 +101,7 @@ await addMetric({
     tags:{env:"prod"}
   })
 ```
-Once you have added the metrics, you can visualize them on the app and even create widgets:
+Once you have added the metrics, you can visualize them on the <a href="https://getlogmint.com">app</a> and even create widgets:
 <img width="660" height="440" alt="320_1x_shots_so" src="https://github.com/user-attachments/assets/106e61ff-824e-486f-aeea-170c9ae0a427" />
 <br/>
 <img width="660" height="440" alt="732_1x_shots_so" src="https://github.com/user-attachments/assets/d1ae78a6-e50c-41f9-9271-d7b9de884286" />
@@ -109,5 +111,5 @@ Application logs are automatically captured!
 
 <img width="660" height="440" alt="725_1x_shots_so" src="https://github.com/user-attachments/assets/8c2a9254-fc17-4469-b160-c7614e889d6c" />
 
-
+### Visit site: https://getlogmint.com
 #### Contact us: support@getlogmint.com
