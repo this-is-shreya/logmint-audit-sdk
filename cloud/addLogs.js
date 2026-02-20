@@ -46,7 +46,7 @@ const addLogs = async (logs) => {
       },
       validateStatus: () => true,
     });
-    console.log("logs added successfully! -", logs);
+    // console.log("logs added successfully! -", logs);
   } catch (err) {
     console.log(err);
   }

@@ -33,7 +33,7 @@ module.exports.sendToCloud = async (log, isFlush) => {
       },
       validateStatus: () => true,
     });
-    console.log("log added successfully! -", log);
+    // console.log("log added successfully! -", log);
     
   } catch (err) {
     console.log(err);

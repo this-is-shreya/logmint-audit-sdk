@@ -32,7 +32,7 @@ module.exports.addMetrics = async (metric) => {
       },
       validateStatus: () => true,
     });
-    console.log("metric added successfully! -", metric);
+    // console.log("metric added successfully! -", metric);
   } catch (err) {
     console.log(err);
   }
