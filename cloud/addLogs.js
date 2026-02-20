@@ -9,7 +9,7 @@ setInterval(() => {
     buffer.logs = [];
     addLogs({ logs: batch });
   }
-}, 1000 * 60 * 10); // every 10 minutes
+}, 1000 * 60); // every 1 minute
 
 
 const addLogs = async (logs) => {
